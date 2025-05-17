@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selamat Ulang Tahun, Sayang!</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .background {
+      background-image: url('https://source.unsplash.com/1600x900/?love,romantic');
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background: pink;
+      color: #000;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff69b4;
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.1em;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Love rain animation */
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Heart_corazón.svg/1024px-Heart_corazón.svg.png');
+      background-size: cover;
+      animation: fall 5s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <!-- Love rain -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Audio musik latar -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <div class="container">
+    <h1>Selamat Ulang Tahun, Cintaku!</h1>
+    <p>Aku punya pesan spesial buat kamu...</p>
+    <button onclick="tampilkanPesan()">Klik di sini</button>
+    <div id="pesan" class="hidden-message">
+      Hari ini adalah hari yang spesial, karena dunia diberkahi dengan kehadiranmu.  
+      Terima kasih sudah menjadi bagian dari hidupku.  
+      Semoga kebahagiaan dan cinta selalu menyertaimu. Aku mencintaimu!
+    </div>
+  </div>
+
+  <script>
+    function tampilkanPesan() {
+      document.getElementById('pesan').style.display = 'block';
+    }
+
+    // Generate hearts for the love rain effect
+    const heartsContainer = document.getElementById('hearts');
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  </script>
+</body>
+</html>
